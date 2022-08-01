@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Styling extension */
+        #extension {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #f76b00;
+            color: white;
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        /* Styling extension */
+    </style>
+    <title>Screen Size Extension</title>
+</head>
+
+<body>
+    <!--First, implement an HTML tag which has an ID as 'extension' -->
+    <div id="extension"></div>
+
+    <!--Then, add the JS code into your HTML file.-->
+    <script>
+        /* Extension */
+        const extension = document.querySelector("#extension");
+        var screenSize = window.innerWidth;
+        var screenType = "Desktop";
+        function checkScreenSize(screenSize) {
+            switch (true) {
+                case screenSize >= 1440:
+                    screenType = "XL - Desktop";
+                    break;
+                case screenSize < 1440 && screenSize >= 1024:
+                    screenType = "Desktop";
+                    break;
+                case screenSize < 1024 && screenSize >= 768:
+                    screenType = "Tablet";
+                    break;
+                case screenSize < 768 && screenSize >= 425:
+                    screenType = "L - Mobile";
+                    break;
+                case screenSize < 425 && screenSize >= 375:
+                    screenType = "M - Mobile";
+                    break;
+                case screenSize < 375 && screenSize >= 320:
+                    screenType = "S - Mobile";
+                    break;
+                case screenSize < 320:
+                    screenType = "XS - Mobile";
+                    break;
+                default:
+                    screenType = "Desktop";
+                    break;
+            }
+        }
+        checkScreenSize();
+        extension.textContent = `${window.innerWidth} px (${screenType})`;
+        window.addEventListener(
+            "resize",
+            () => {
+                checkScreenSize(window.innerWidth);
+                extension.textContent = `${window.innerWidth} px (${screenType})`;
+            },
+            true
+        );
+    /* Extension */
+    </script>
+</body>
+
+</html>
